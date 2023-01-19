@@ -1,9 +1,3 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable prefer-template */
-/* eslint-disable no-use-before-define */
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-plusplus */
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -33,7 +27,6 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 // Examples
-addBookToLibrary('Title', 'Author', 251, 'Already read');
 addBookToLibrary('The book', 'John Smith', 511, 'Already read');
 addBookToLibrary('Rich quick', 'Robert', 2541, 'Haven\'t read yet');
 addBookToLibrary('How to code', 'Odin', 221, 'Already read');
@@ -68,13 +61,13 @@ function displayBooks() {
    btn1.setAttribute('data-', `${index}`);
    btn1.textContent = 'Remove';
    container.appendChild(btn1);
-   createRemover();
+   createRemover(btn1);
    const btn2  = document.createElement('button');
    btn2.classList.add('changer');
    btn2.setAttribute('data-', `${index}`);
    btn2.textContent = 'Change Status';
    container.appendChild(btn2);
-   createChanger();
+   createChanger(btn2);
 }
 
 const form = document.querySelector('form');
@@ -97,16 +90,12 @@ function toggleFormOff(event){
   })
   console.log(select.value);
   createBook.push(select.value);
-
   form.style.display = "none";
-
   console.log(createBook);
   addBookToLibrary(...createBook)
-
   for (let i = 0; i < myLibrary.length; i++) {
     console.log(myLibrary[i].info()); 
   }
-  
   displayBooks();
   event.preventDefault();
 }
@@ -120,53 +109,30 @@ const subBtn = document.querySelector('#sub');
 subBtn.addEventListener('click', toggleFormOff);
 
 // Event listening + handling
-function createRemover(){
-const removeBtn = document.querySelectorAll('.remover');
-removeBtn.forEach((button) => {
-  console.log(button.textContent);
+function createRemover(button){
   button.addEventListener('click', function(e){
-    console.log("omgomgomg");
     const placement = button.getAttribute('data-');
-    console.log(placement);
     const bookDiv = document.querySelectorAll('.bookContainer');
     bookDiv.forEach((div) => {
-      console.log(div.firstElementChild.textContent);
-      console.log(myLibrary[placement].info());
       if (div.firstElementChild.textContent == (myLibrary[placement].info())) {
         div.remove();
       }
     })
   })
-})
 }
 
-function createChanger(){
-  const changeBtn = document.querySelectorAll('.changer');
-  changeBtn.forEach((button) => {
-    console.log(button.textContent);
+function createChanger(button){
     button.addEventListener('click', function(e){
-      console.log("omgomgomg");
       const placement = button.getAttribute('data-');
       console.log(placement);
       const bookDiv = document.querySelectorAll('.bookContainer');
       bookDiv.forEach((div) => {
-        console.log(div.firstElementChild.textContent);
-        console.log(myLibrary[placement].info());
         if (div.firstElementChild.textContent == (myLibrary[placement].info())) {
           myLibrary[placement].changeStatus();
-          console.log(myLibrary[placement].info());
           div.firstElementChild.textContent = myLibrary[placement].info();
-          console.log("this is the")
-          console.log(div.firstElementChild.textContent)
-        } else{
-          console.log("They dont match")
-          console.log(div.firstElementChild.textContent);
-          console.log(myLibrary[placement].info());
-          console.log(placement);
-        }
+        } 
       })
     })
-  })
   }
 
 

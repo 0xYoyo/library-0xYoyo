@@ -70,3 +70,13 @@ input[type=text]{
     height: 2rem;
     font-size: 1.3rem;
 }
+
+.bookContainer{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+}
+
+h1{
+    text-align: center;
+}
